@@ -1,0 +1,26 @@
+{
+  "name": "zerog-upload-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.8.0",
+  "dependencies": {
+    "@0glabs/0g-ts-sdk": "^0.2.9",
+    "@walletconnect/client": "^1.8.0",
+    "@walletconnect/qrcode-modal": "^1.8.0",
+    "@walletconnect/sign-client": "^2.20.0",
+    "dotenv": "^16.5.0",
+    "ethers": "^6.13.5",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2",
+    "node-telegram-bot-api": "^0.66.0",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
