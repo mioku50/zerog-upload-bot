@@ -52,7 +52,7 @@ cd zerog-upload-bot
 ```bash
 pnpm install
 ```
-### mkdir files
+```mkdir files```
 ### 3. Create `.env`
 
 ```ini
