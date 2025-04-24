@@ -43,7 +43,7 @@
 ### 1. Clone this repo
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/zerog-upload-bot.git
+git clone https://github.com/mioku50/zerog-upload-bot.git
 cd zerog-upload-bot
 ```
 
