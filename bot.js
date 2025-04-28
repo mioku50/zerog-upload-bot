@@ -12,7 +12,7 @@ dotenv.config();
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 
 bot.onText(/\/start/, (msg) => {
-  bot.sendMessage(msg.chat.id, 'Привет! Я ZeroG Upload Bot.\n\n1. Используй /connect чтобы подключить кошелёк\n2. Загрузи файл — я сохраню его в 0G Storage');
+  bot.sendMessage(msg.chat.id, 'Hi! I ZeroG Upload Bot. Sn1. Use /connect to connect your wallet{n2}. Upload the file, I ll save it to 0G Storage.');
 });
 
 bot.onText(/\/connect/, async (msg) => {
@@ -20,22 +20,22 @@ bot.onText(/\/connect/, async (msg) => {
     const address = await requestWalletSignature(msg.from.id, async (qrBase64) => {
       const buffer = Buffer.from(qrBase64.split(',')[1], 'base64');
       await bot.sendPhoto(msg.chat.id, buffer, {
-        caption: 'Отсканируй этот QR-код в MetaMask для подключения:',
+        caption: 'Scan this QR code into MetaMask to connect:',
       });
     });
 
-    bot.sendMessage(msg.chat.id, `Кошелёк ${address} успешно подключен!`);
+    bot.sendMessage(msg.chat.id, `Wallet ${address} success connected!`);
   } catch (err) {
-    bot.sendMessage(msg.chat.id, `Ошибка подключения: ${err}`);
+    bot.sendMessage(msg.chat.id, `Error connected: ${err}`);
   }
 });
 
 bot.onText(/\/whoami/, (msg) => {
   const address = getSession(msg.from.id);
   if (address) {
-    bot.sendMessage(msg.chat.id, `Ты подключён как: ${address}`);
+    bot.sendMessage(msg.chat.id, `You re wired as: ${address}`);
   } else {
-    bot.sendMessage(msg.chat.id, 'Кошелёк не подключён. Используй /connect.');
+    bot.sendMessage(msg.chat.id, 'The wallet is not connected. Use /connect.');
   }
 });
 
@@ -44,7 +44,7 @@ bot.on('document', async (msg) => {
   const address = getSession(userId);
 
   if (!address) {
-    bot.sendMessage(msg.chat.id, 'Сначала подключи MetaMask через /connect.');
+    bot.sendMessage(msg.chat.id, 'First, connect MetaMask via /connect.');
     return;
   }
 
@@ -58,12 +58,12 @@ bot.on('document', async (msg) => {
   response.body.pipe(stream);
 
   stream.on('finish', async () => {
-    bot.sendMessage(msg.chat.id, 'Загружаю файл в 0G Storage...');
+    bot.sendMessage(msg.chat.id, 'Uploading a file to 0G Storage...');
     try {
       const { rootHash, txHash } = await uploadTo0G(filePath);
-      bot.sendMessage(msg.chat.id, `Файл загружен!\nRoot Hash: \`${rootHash}\`\nTX Hash: \`${txHash}\``, { parse_mode: 'Markdown' });
+      bot.sendMessage(msg.chat.id, `File  uploaded!\nRoot Hash: \`${rootHash}\`\nTX Hash: \`${txHash}\``, { parse_mode: 'Markdown' });
     } catch (e) {
-      bot.sendMessage(msg.chat.id, 'Ошибка при загрузке файла в 0G.');
+      bot.sendMessage(msg.chat.id, 'Error when uploading a file to 0G.');
     }
   });
 });
