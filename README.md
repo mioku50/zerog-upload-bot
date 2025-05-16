@@ -7,7 +7,7 @@
 ## 🌐 Live Network
 
 - **Chain Name:** 0G-Galileo-Testnet  
-- **Chain ID:** 80087  
+- **Chain ID:** 16601  
 - **Token Symbol:** OG  
 - **RPC URL:** https://evmrpc-testnet.0g.ai  
 - **Indexer URL:** https://indexer-storage-testnet-turbo.0g.ai  
